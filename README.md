@@ -45,3 +45,20 @@ npm install -D eslint eslint-plugin-vue @typescript-eslint/eslint-plugin @typesc
 ```sh
 npm install vue-router@4
 ```
+
+#### 1.3.3. Axios
+
+---
+
+```sh
+npm install axios
+```
+
+#### 1.3.4. Luxon
+
+---
+
+```sh
+npm install luxon
+npm install -D @types/luxon
+```

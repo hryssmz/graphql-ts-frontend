@@ -17,4 +17,10 @@ module.exports = {
   },
   plugins: ["vue", "@typescript-eslint"],
   rules: {},
+  overrides: [
+    {
+      files: ["*.ts", "*.vue"],
+      rules: { "no-undef": "off" },
+    },
+  ],
 };

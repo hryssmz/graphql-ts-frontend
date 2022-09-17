@@ -1,6 +1,6 @@
 <!-- App.vue -->
 <template>
-  <div>
+  <div :style="{ width: '80%', margin: 'auto' }">
     <NavigationBar />
     <router-view></router-view>
   </div>
