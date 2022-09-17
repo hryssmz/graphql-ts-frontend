@@ -16,16 +16,17 @@ import client from "../utils/client";
 
 export default defineComponent({
   setup() {
-    const bookList = ref<Book[]>([]);
+    const bookListData = ref<BookListApiData["bookList"]>([]);
+
     const books = computed(() =>
-      bookList.value.map(book => ({
+      bookListData.value.map(book => ({
         ...book,
         authorName: `${book.author.firstName}, ${book.author.familyName}`,
       }))
     );
 
     client.get<BookListApiData>("/books").then(({ data }) => {
-      bookList.value = data.bookList;
+      bookListData.value = data.bookList;
     });
 
     return { books };

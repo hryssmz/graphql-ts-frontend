@@ -3,7 +3,7 @@
   <div>
     <h1>Genre List</h1>
     <ul>
-      <li v-for="genre in genreList" :key="genre.id">
+      <li v-for="genre in genres" :key="genre.id">
         <a href="#">{{ genre.name }}</a>
       </li>
     </ul>
@@ -11,17 +11,22 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { computed, defineComponent, ref } from "vue";
 import client from "../utils/client";
 
 export default defineComponent({
   setup() {
-    const genreList = ref<Genre[]>([]);
+    const genreListData = ref<GenreListApiData["genreList"]>([]);
+
+    const genres = computed(() =>
+      genreListData.value.map(genre => ({ ...genre }))
+    );
+
     client.get<GenreListApiData>("/genres").then(({ data }) => {
-      genreList.value = data.genreList;
+      genreListData.value = data.genreList;
     });
 
-    return { genreList };
+    return { genres };
   },
 });
 </script>

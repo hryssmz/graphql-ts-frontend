@@ -1,4 +1,6 @@
-declare interface Author {
+declare type BookStatus = "Available" | "Maintenance" | "Loaned" | "Reserved";
+
+interface Author {
   id: number;
   firstName: string;
   familyName: string;
@@ -6,23 +8,23 @@ declare interface Author {
   dateOfDeath: string | null;
 }
 
-declare interface Book {
+interface Book {
   id: number;
   title: string;
-  author: Author;
+  authorId: number;
+  summary: string;
+  isbn: string;
 }
 
-declare type BookStatus = "Available" | "Maintenance" | "Loaned" | "Reserved";
-
-declare interface BookInstance {
+interface BookInstance {
   id: number;
-  book: Book;
+  bookId: number;
   imprint: string;
   status: BookStatus | null;
   dueBack: string | null;
 }
 
-declare interface Genre {
+interface Genre {
   id: number;
   name: string;
 }
@@ -39,12 +41,17 @@ declare interface AuthorListApiData {
   authorList: Author[];
 }
 
+declare interface AuthorDetailApiData {
+  author: Author;
+  authorsBooks: Pick<Book, "id" | "title" | "summary">[];
+}
+
 declare interface BookListApiData {
-  bookList: Book[];
+  bookList: (Pick<Book, "id" | "title"> & { author: Author })[];
 }
 
 declare interface BookInstanceListApiData {
-  bookInstanceList: BookInstance[];
+  bookInstanceList: (BookInstance & { book: Book })[];
 }
 
 declare interface GenreListApiData {

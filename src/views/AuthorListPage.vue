@@ -4,7 +4,10 @@
     <h1>Author List</h1>
     <ul>
       <li v-for="author in authors" :key="author.id">
-        <a href="#">{{ author.name }}</a> ({{ author.lifespan }})
+        <router-link :to="`/author/${author.id}`">
+          {{ author.name }}
+        </router-link>
+        ({{ author.lifespan }})
       </li>
     </ul>
   </div>
@@ -17,9 +20,10 @@ import client from "../utils/client";
 
 export default defineComponent({
   setup() {
-    const authorList = ref<Author[]>([]);
+    const authorListData = ref<AuthorListApiData["authorList"]>([]);
+
     const authors = computed(() =>
-      authorList.value.map(author => ({
+      authorListData.value.map(author => ({
         ...author,
         name: `${author.firstName}, ${author.familyName}`,
         lifespan: `${prettifyISODate(author.dateOfBirth)} - ${prettifyISODate(
@@ -29,7 +33,7 @@ export default defineComponent({
     );
 
     client.get<AuthorListApiData>("/authors").then(({ data }) => {
-      authorList.value = data.authorList;
+      authorListData.value = data.authorList;
     });
 
     return { authors };

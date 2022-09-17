@@ -26,9 +26,12 @@ import { prettifyISODate } from "../utils";
 
 export default defineComponent({
   setup() {
-    const bookInstanceList = ref<BookInstance[]>([]);
+    const bookInstanceListData = ref<
+      BookInstanceListApiData["bookInstanceList"]
+    >([]);
+
     const bookInstances = computed(() =>
-      bookInstanceList.value.map(bookInstance => ({
+      bookInstanceListData.value.map(bookInstance => ({
         ...bookInstance,
         prettyDueBack: prettifyISODate(bookInstance.dueBack),
         color:
@@ -41,7 +44,7 @@ export default defineComponent({
     );
 
     client.get<BookInstanceListApiData>("/book-instances").then(({ data }) => {
-      bookInstanceList.value = data.bookInstanceList;
+      bookInstanceListData.value = data.bookInstanceList;
     });
 
     return { bookInstances };
