@@ -32,9 +32,12 @@ export default defineComponent({
       }))
     );
 
-    client.get<AuthorListApiData>("/authors").then(({ data }) => {
-      authorListData.value = data.authorList;
-    });
+    client
+      .get<AuthorListApiData>("/authors")
+      .then(({ data }) => {
+        authorListData.value = data.authorList;
+      })
+      .catch(console.error);
 
     return { authors };
   },

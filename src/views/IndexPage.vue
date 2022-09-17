@@ -34,13 +34,16 @@ export default defineComponent({
     const authorCount = ref(0);
     const genreCount = ref(0);
 
-    client.get<IndexApiData>("/").then(({ data }) => {
-      bookCount.value = data.bookCount;
-      bookInstanceCount.value = data.bookInstanceCount;
-      bookInstanceAvailableCount.value = data.bookInstanceAvailableCount;
-      authorCount.value = data.authorCount;
-      genreCount.value = data.genreCount;
-    });
+    client
+      .get<IndexApiData>("/")
+      .then(({ data }) => {
+        bookCount.value = data.bookCount;
+        bookInstanceCount.value = data.bookInstanceCount;
+        bookInstanceAvailableCount.value = data.bookInstanceAvailableCount;
+        authorCount.value = data.authorCount;
+        genreCount.value = data.genreCount;
+      })
+      .catch(console.error);
 
     return {
       bookCount,

@@ -10,7 +10,9 @@
         <!-- eslint-disable-next-line vue/no-v-for-template-key -->
         <template v-for="book in authorsBooks" :key="book.id">
           <dt>
-            <a href="#">{{ book.title }}</a>
+            <router-link :to="`/book/${book.id}`">
+              {{ book.title }}
+            </router-link>
           </dt>
           <dd>{{ book.summary }}</dd>
         </template>
@@ -19,8 +21,16 @@
     </div>
 
     <hr />
-    <p><a href="#">Update author</a></p>
-    <p><a href="#">Delete author</a></p>
+    <p>
+      <router-link :to="`/author/${author.id}/update`">
+        Update author
+      </router-link>
+    </p>
+    <p>
+      <router-link :to="`/author/${author.id}/delete`">
+        Delete author
+      </router-link>
+    </p>
   </div>
 </template>
 
@@ -29,19 +39,14 @@ import { computed, defineComponent, ref } from "vue";
 import { useRoute } from "vue-router";
 import { prettifyISODate } from "../utils";
 import client from "../utils/client";
+import { dummyAuthor } from "../utils/constants";
 
 export default defineComponent({
   setup() {
     const route = useRoute();
     const id = route.params.id as string;
 
-    const authorData = ref<AuthorDetailApiData["author"]>({
-      id: -1,
-      firstName: "",
-      familyName: "",
-      dateOfBirth: null,
-      dateOfDeath: null,
-    });
+    const authorData = ref<AuthorDetailApiData["author"]>(dummyAuthor);
     const authorsBooksData = ref<AuthorDetailApiData["authorsBooks"]>([]);
 
     const author = computed(() => ({
@@ -55,10 +60,13 @@ export default defineComponent({
       authorsBooksData.value.map(book => ({ ...book }))
     );
 
-    client.get<AuthorDetailApiData>(`/author/${id}`).then(({ data }) => {
-      authorData.value = data.author;
-      authorsBooksData.value = data.authorsBooks;
-    });
+    client
+      .get<AuthorDetailApiData>(`/author/${id}`)
+      .then(({ data }) => {
+        authorData.value = data.author;
+        authorsBooksData.value = data.authorsBooks;
+      })
+      .catch(console.error);
 
     return { author, authorsBooks };
   },

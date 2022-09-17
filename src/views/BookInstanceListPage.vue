@@ -4,9 +4,10 @@
     <h1>Book Instance List</h1>
     <ul>
       <li v-for="bookInstance in bookInstances" :key="bookInstance.id">
-        <a href="#">
-          {{ bookInstance.book.title }} : {{ bookInstance.imprint }}
-        </a>
+        <router-link :to="`/book-instance/${bookInstance.id}`">
+          {{ bookInstance.book.title }} :
+          {{ bookInstance.imprint }}
+        </router-link>
         -
         <span :style="{ color: bookInstance.color }">
           {{ bookInstance.status }}
@@ -43,9 +44,12 @@ export default defineComponent({
       }))
     );
 
-    client.get<BookInstanceListApiData>("/book-instances").then(({ data }) => {
-      bookInstanceListData.value = data.bookInstanceList;
-    });
+    client
+      .get<BookInstanceListApiData>("/book-instances")
+      .then(({ data }) => {
+        bookInstanceListData.value = data.bookInstanceList;
+      })
+      .catch(console.error);
 
     return { bookInstances };
   },

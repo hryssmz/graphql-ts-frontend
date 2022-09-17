@@ -4,7 +4,9 @@
     <h1>Book List</h1>
     <ul>
       <li v-for="book in books" :key="book.id">
-        <a href="#">{{ book.title }}</a> ({{ book.authorName }})
+        <router-link :to="`/book/${book.id}`">
+          {{ book.title }}
+        </router-link>
       </li>
     </ul>
   </div>
@@ -25,9 +27,12 @@ export default defineComponent({
       }))
     );
 
-    client.get<BookListApiData>("/books").then(({ data }) => {
-      bookListData.value = data.bookList;
-    });
+    client
+      .get<BookListApiData>("/books")
+      .then(({ data }) => {
+        bookListData.value = data.bookList;
+      })
+      .catch(console.error);
 
     return { books };
   },

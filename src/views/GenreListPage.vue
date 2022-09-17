@@ -4,7 +4,9 @@
     <h1>Genre List</h1>
     <ul>
       <li v-for="genre in genres" :key="genre.id">
-        <a href="#">{{ genre.name }}</a>
+        <router-link :to="`/genre/${genre.id}`">
+          {{ genre.name }}
+        </router-link>
       </li>
     </ul>
   </div>
@@ -22,9 +24,12 @@ export default defineComponent({
       genreListData.value.map(genre => ({ ...genre }))
     );
 
-    client.get<GenreListApiData>("/genres").then(({ data }) => {
-      genreListData.value = data.genreList;
-    });
+    client
+      .get<GenreListApiData>("/genres")
+      .then(({ data }) => {
+        genreListData.value = data.genreList;
+      })
+      .catch(console.error);
 
     return { genres };
   },

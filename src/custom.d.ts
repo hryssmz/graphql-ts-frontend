@@ -50,10 +50,24 @@ declare interface BookListApiData {
   bookList: (Pick<Book, "id" | "title"> & { author: Author })[];
 }
 
+declare interface BookDetailApiData {
+  book: Book & { author: Author; genres: Genre[] };
+  bookInstances: BookInstance[];
+}
+
 declare interface BookInstanceListApiData {
   bookInstanceList: (BookInstance & { book: Book })[];
 }
 
+declare interface BookInstanceDetailApiData {
+  bookInstance: BookInstance & { book: Book };
+}
+
 declare interface GenreListApiData {
   genreList: Genre[];
+}
+
+declare interface GenreDetailApiData {
+  genre: Genre;
+  genreBooks: Book[];
 }
