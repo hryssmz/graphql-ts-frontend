@@ -1,13 +1,27 @@
 <!-- views/GenreListPage.vue -->
 <template>
-  <div>Genre List</div>
+  <div>
+    <h1>Genre List</h1>
+    <ul>
+      <li v-for="genre in genreList" :key="genre.id">
+        <a href="#">{{ genre.name }}</a>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
+import client from "../utils/client";
+
 export default defineComponent({
   setup() {
-    return {};
+    const genreList = ref<Genre[]>([]);
+    client.get<GenreListApiData>("/genres").then(({ data }) => {
+      genreList.value = data.genreList;
+    });
+
+    return { genreList };
   },
 });
 </script>
