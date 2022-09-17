@@ -38,18 +38,10 @@ npm install -D eslint eslint-plugin-vue @typescript-eslint/eslint-plugin @typesc
 
 ---
 
-#### 1.3.1. Element Plus
+#### 1.3.1. Vue Router
 
 ---
 
 ```sh
-npm install element-plus
-```
-
-#### 1.3.2. UnoCSS
-
----
-
-```sh
-npm install -D unocss
+npm install vue-router@4
 ```
