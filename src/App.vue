@@ -1,11 +1,20 @@
 <!-- App.vue -->
-<script setup lang="ts"></script>
-
 <template>
   <div>
-    <h1>Hello World</h1>
+    <NavigationBar />
     <router-view></router-view>
   </div>
 </template>
+
+<script lang="ts">
+import { defineComponent } from "vue";
+import NavigationBar from "./components/NavigationBar.vue";
+export default defineComponent({
+  setup() {
+    return {};
+  },
+  components: { NavigationBar },
+});
+</script>
 
 <style scoped></style>
