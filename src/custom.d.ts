@@ -1,7 +1,7 @@
 declare type BookStatus = "Available" | "Maintenance" | "Loaned" | "Reserved";
 
 interface Author {
-  id: number;
+  id: string;
   firstName: string;
   familyName: string;
   dateOfBirth: string | null;
@@ -9,7 +9,7 @@ interface Author {
 }
 
 interface Book {
-  id: number;
+  id: string;
   title: string;
   authorId: number;
   summary: string;
@@ -17,7 +17,7 @@ interface Book {
 }
 
 interface BookInstance {
-  id: number;
+  id: string;
   bookId: number;
   imprint: string;
   status: BookStatus | null;
@@ -25,7 +25,7 @@ interface BookInstance {
 }
 
 interface Genre {
-  id: number;
+  id: string;
   name: string;
 }
 

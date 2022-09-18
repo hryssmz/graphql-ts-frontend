@@ -17,6 +17,13 @@
         </span>
       </li>
     </ul>
+
+    <hr />
+    <p>
+      <router-link :to="`/book-instances/create`">
+        Create book instance
+      </router-link>
+    </p>
   </div>
 </template>
 

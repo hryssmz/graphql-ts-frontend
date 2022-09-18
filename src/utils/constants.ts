@@ -1,6 +1,6 @@
 // utils/constants.ts
 export const dummyAuthor: Author = {
-  id: -1,
+  id: "",
   firstName: "",
   familyName: "",
   dateOfBirth: null,
@@ -8,7 +8,7 @@ export const dummyAuthor: Author = {
 };
 
 export const dummyBook: Book = {
-  id: -1,
+  id: "",
   title: "",
   authorId: -1,
   summary: "",
@@ -16,7 +16,7 @@ export const dummyBook: Book = {
 };
 
 export const dummyBookInstance: BookInstance = {
-  id: -1,
+  id: "",
   bookId: -1,
   imprint: "",
   status: null,
@@ -24,6 +24,6 @@ export const dummyBookInstance: BookInstance = {
 };
 
 export const dummyGenre: Genre = {
-  id: -1,
+  id: "",
   name: "",
 };

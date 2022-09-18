@@ -10,6 +10,11 @@
         ({{ author.lifespan }})
       </li>
     </ul>
+
+    <hr />
+    <p>
+      <router-link :to="`/authors/create`">Create author</router-link>
+    </p>
   </div>
 </template>
 

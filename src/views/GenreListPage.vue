@@ -9,6 +9,11 @@
         </router-link>
       </li>
     </ul>
+
+    <hr />
+    <p>
+      <router-link :to="`/genres/create`">Create genre</router-link>
+    </p>
   </div>
 </template>
 

@@ -9,6 +9,11 @@
         </router-link>
       </li>
     </ul>
+
+    <hr />
+    <p>
+      <router-link :to="`/books/create`">Create book</router-link>
+    </p>
   </div>
 </template>
 
